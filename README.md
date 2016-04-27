@@ -17,13 +17,13 @@ web/dist                //
 
 
 # CLI
-gulp					// default action.
-gulp info				// pring current environment info.
-gulp production			// change environment to production.
-gulp test				// change environment to test.
-gulp dev				// change environment to dev devlopers.
-gulp clean				// delete temp and dist floder.
-gulp babel				// compile babel to javascript and merge js model.
-gulp coffee				// compile coffeeScript to javascript and merge js model.
-gulp sass				// compile sass to css and merge css model and minfy.
+gulp					// default action.   
+gulp info				// pring current environment info.   
+gulp production			// change environment to production.   
+gulp test				// change environment to test.   
+gulp dev				// change environment to dev devlopers.   
+gulp clean				// delete temp and dist floder.   
+gulp babel				// compile babel to javascript and merge js model.   
+gulp coffee				// compile coffeeScript to javascript and merge js model.   
+gulp sass				// compile sass to css and merge css model and minfy.   
 gulp build				// 
