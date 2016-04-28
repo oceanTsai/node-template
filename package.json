@@ -1,5 +1,5 @@
 {
-  "name": "ocean_template",
+  "name": "node_template",
   "version": "1.0.0",
   "description": "web template of nodejs + express + swig",
   "scripts": {
