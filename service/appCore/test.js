@@ -1,4 +1,7 @@
-console.log('excute test.js');
+//node ./service/appCore/test.js
+console.log('==============================================');
+console.log(' service  run');
+console.log('==============================================');
 const express = require('express');
 const app  = express();
 const swig = require('swig');
@@ -7,14 +10,26 @@ const fs = require('fs');              //檔案讀取
 
 const project = JSON.parse(fs.readFileSync('./service/config/projectInfo.json', 'utf8').toString());
 const version = project.version;
-console.log(version);
+const host = project.host;
+const resource = project.resource;
+
+console.log('--------------------------------------------');
+console.log('info');
+console.log('--------------------------------------------');
+console.log("version  : " +version);
+console.log("host     : " + host);
+console.log("resource : " + resource);
+console.log('');
+
 /**----------------------------------------------
  *
  *	 __dirname   絕對路徑，目前檔案所在資料夾路徑。
  *   __filename  絕對路徑，目前檔案路徑。
  *
  *----------------------------------------------*/
-console.log('--------------------');
+console.log('--------------------------------------------');
+console.log('path');
+console.log('--------------------------------------------');
 console.log(__dirname);
 console.log(__filename);
 console.log(path.normalize(__dirname+path.sep+'..'));
@@ -22,9 +37,16 @@ console.log(path.resolve('\service\\views'));
 console.log(path.sep);
 console.log(path.dirname(__dirname));
 console.log(path.dirname(__dirname)+path.sep+'views');
-console.log('--------------------');
+console.log('');
+
+
 var res_url = path.normalize(__dirname+path.sep+'..'+path.sep+'..')+path.sep+'web'+path.sep+'dist'+path.sep+version+path.sep;
+console.log('--------------------------------------------');
+console.log("resource path");
+console.log('--------------------------------------------');
 console.log(res_url);
+console.log('');
+
 //靜態資源
 app.use(express.static(res_url));
 
@@ -43,11 +65,11 @@ swig.setDefaults({ cache: false });
 // Don't leave both of these to `false` in production!
 
 app.get('/', function (req, res) {
-  res.render('test', { title : '測試'});
+  res.render('test', { title : '測試', host: host, resource : resource});
 });
 
 app.get('/test', function (req, res) {
-  res.render('test', { title : '測試'});
+  res.render('test', { title : '測試', host : host, resource : resource});
 });
 
 app.listen(1337);
