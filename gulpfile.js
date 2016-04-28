@@ -28,7 +28,7 @@ const browserify  = require('gulp-browserify'); //js模組化載入工具
 const project = JSON.parse(fs.readFileSync('./service/config/projectInfo.json', 'utf8').toString());
 const version = project.version;
 */
-var project = require( "./service/config/projectInfo.json" );
+const project = require( "./service/config/projectInfo.json" );
 const version = project.version;
 
 const path = {};

@@ -8,7 +8,9 @@ const swig = require('swig');
 const path = require("path");
 const fs = require('fs');              //檔案讀取
 
-const project = JSON.parse(fs.readFileSync('./service/config/projectInfo.json', 'utf8').toString());
+//const project = JSON.parse(fs.readFileSync('./service/config/projectInfo.json', 'utf8').toString());
+const project = require( "../config/projectInfo.json" );
+
 const version = project.version;
 const host = project.host;
 const resource = project.resource;
