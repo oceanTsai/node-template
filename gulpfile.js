@@ -24,7 +24,11 @@ const browserify  = require('gulp-browserify'); //js模組化載入工具
 //const versionRegex = /^version=(\S+)/m;
 //const version = fs.readFileSync('./service/config/project.json', 'utf8').toString().match(versionRegex)[1];
 //console.log(process.argv);
+/*
 const project = JSON.parse(fs.readFileSync('./service/config/projectInfo.json', 'utf8').toString());
+const version = project.version;
+*/
+var project = require( "./service/config/projectInfo.json" );
 const version = project.version;
 
 const path = {};
