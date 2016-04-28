@@ -1,8 +1,17 @@
-# node-template
-node web template
+# description
+1. node web template is WEB structure.   
+2. Express is web framework.   
+3. Swig is view template engine.   
 
-# Need
-1. install nodejs
+# Guid
+1. need install nodejs.  (請先安裝 nodejs )
+
+# Getting started
+1. npm install   
+2. gulp clean   
+3. gulp dev   
+4. gulp build   
+5. node ./service/appCore/test.js   
 
 
 # Folder
@@ -16,7 +25,7 @@ web/dist                //
 
 
 
-# CLI
+# gulp CLI
 gulp					// default action.   
 gulp info				// pring current environment info.   
 gulp production			// change environment to production.   
