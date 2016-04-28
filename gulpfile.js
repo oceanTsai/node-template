@@ -9,7 +9,7 @@
 
 const gulp        = require('gulp');            //工作管理
 const gutil       = require('gulp-util');       //
-const fs          = require('fs');              //檔案讀取
+//const fs          = require('fs');              //檔案讀取
 const del         = require('del');             //檔案刪除
 const babel       = require('gulp-babel');      //babel   轉譯
 const coffee      = require('gulp-coffee');     //coffee  轉譯
