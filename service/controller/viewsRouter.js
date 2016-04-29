@@ -7,7 +7,6 @@
 			var fs = require('fs');
 			var path = require('path');
 			var filePath = path.resolve(__dirname, '../views/'+viewUrl);
-			console.log(filePath);
 			fs.exists(filePath, function (exists) {
 				//這裡需要檢查檔案存在與否
 				//console.log(exists);
