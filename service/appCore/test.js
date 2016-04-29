@@ -30,32 +30,27 @@ console.log('');
  *
  *----------------------------------------------*/
 console.log('--------------------------------------------');
-console.log('path');
+console.log('path'										  );
 console.log('--------------------------------------------');
 console.log(__dirname);
 console.log(__filename);
-console.log(path.normalize(__dirname+path.sep+'..'));
-console.log(path.resolve('\service\\views'));
-console.log(path.sep);
-console.log(path.dirname(__dirname));
-console.log(path.dirname(__dirname)+path.sep+'views');
-console.log('');
+//path method test
+//console.log(path.sep);											// window 為 \ linux 為/
+//console.log(path.normalize('/Users/xxx/otp/demo.js'));    		// \Users\xxx\otp\demo.js
+//console.log(path.dirname('/Users/xxx/otp/demo.js'));				// /Users/xxx/otp
+//console.log(path.basename('/Users/xxx/otp/demo.js'));				// demo.js
+//console.log(path.extname('/Users/xxx/otp/demo.js'));				// .js
+//console.log(path.resolve('/Users/xxx/otp/demo.js', '../../'));	//\Users\xxx   以__dirname為主，作相對路徑解析
+var res_url 	= path.resolve(__dirname, '../../web/dist/'+version+'/');
+var views_path	= path.resolve(__dirname, '../views/test');
 
-
-var res_url = path.normalize(__dirname+path.sep+'..'+path.sep+'..')+path.sep+'web'+path.sep+'dist'+path.sep+version+path.sep;
-console.log('--------------------------------------------');
-console.log("resource path");
-console.log('--------------------------------------------');
-console.log(res_url);
-console.log('');
-
-//靜態資源
+//設定靜態資源所在路徑  (如資源移到nginx或是aws s3則此處註解掉)
 app.use(express.static(res_url));
 
 // This is where all the magic happens!
 app.engine('html', swig.renderFile);
 app.set('view engine', 'html');
-app.set('views', path.dirname(__dirname)+path.sep+'views'+path.sep+'test');	//設定views所在路徑
+app.set('views', views_path);	//設定views所在路徑
 
 
 // Swig will cache templates for you, but you can disable
