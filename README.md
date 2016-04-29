@@ -11,17 +11,25 @@
 2. gulp clean   
 3. gulp dev   
 4. gulp build   
-5. node ./service/appCore/test.js   
+5. node ./service/appCore/test.js  or npm start
 
 
 # Folder
+service/appCore 		//app server core code
+
 service/config/** 		// runtime config of app server.
 
 service/configTmp/** 	// environment template of app server.
 
+service/controller      // controller layer of MVC
+
+service/model 		    // model layer of MVC
+
+service/views      		// view layer of MVC
+
 service/webResource/**	// web resource (babel coffee react sass) 
 
-web/dist                // 
+web/dist                // build output
 
 
 
