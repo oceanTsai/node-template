@@ -4,15 +4,15 @@
 
 		app.route('/book')
 		   .get(function(req, res) {
-		   		res.send('Get a random book');
-		   		if( req.session){
-		   			//has book
+		   		
+		   		if( req.session.book){
 		   			console.log(req.session);
 		   		}else{
-		   			//write book
-		   		
+		   			req.session.book = {name : 'head first redis'};
 		   			console.log('empty');
 		   		}
+
+		   		res.send('Get a random book');
 
 		   })
 		   .post(function(req, res) {

@@ -6,6 +6,7 @@
   const RedisStore    = require('connect-redis')(session); //session 持久化
   const app           = express();
   const swig          = require('swig');
+  const bodyParser    = require('body-parser');
   const cookieParser  = require('cookie-parser');
   const path          = require('path');
   const project       = require('../config/projectInfo.json');
@@ -37,7 +38,7 @@
     app.use(cookieParser());
     app.use(session({
       saveUninitialized: true,
-      resave: true,
+      resave: false,
       store: new RedisStore({host:redis.host,port:redis.port}),
       secret: secret                                    //加密用字串
     }));
