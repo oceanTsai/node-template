@@ -75,7 +75,7 @@ GET [your key]
 
 #nginx load balancer
 1. set nginx.conf
-
+```
 #user  nobody;
 worker_processes  4;
 
@@ -233,3 +233,4 @@ http {
     #}
 
 }
+```
