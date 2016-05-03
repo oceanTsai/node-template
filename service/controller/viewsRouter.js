@@ -25,7 +25,7 @@
 			//發生例外
 		  //res.status(500).send({ error: 'Something failed!' });   
 		  //res.sendStatus(500); // 等于 res.status(500).send('500') 
-    });
+		});
 		
 	};
 	

@@ -5,6 +5,7 @@
 
 # Guid
 1. need install nodejs.  (請先安裝 nodejs )
+2. need install redis (do session share).
 
 # Getting started
 1. npm install   
@@ -44,3 +45,26 @@ gulp babel				// compile babel to javascript and merge js model.
 gulp coffee				// compile coffeeScript to javascript and merge js model.   
 gulp sass				// compile sass to css and merge css model and minfy.   
 gulp build				// 
+
+
+# module
+redis : Redis client.
+express-session  : server-side session storage, MemoryStore.
+connect-redis : is a Redis session store backed by node_redis. (Persistence)
+cookie-parser : express cookie manager module.
+
+
+
+
+
+# redis
+1. install & download   
+windows : https://github.com/MSOpenTech/redis/releases   
+linux : http://redis.io/download   
+
+2. redis start
+redis windows start : redis-server redis.windows.conf   
+redis client :  redis-cli
+
+3. find all keys
+ KEYS *  

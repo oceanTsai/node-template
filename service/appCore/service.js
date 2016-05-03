@@ -1,3 +1,6 @@
+//-------------------------
+// nodejs 多核
+//-------------------------
 'use strict';
 const cluster   = require('cluster');              //nodejs 多核心應用系統  multi-core systems
 const cpus      = require('os').cpus().length;     //系統核心數

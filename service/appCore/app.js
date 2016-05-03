@@ -2,6 +2,8 @@
 (function(module){
   //const https       = require('https');
   const express       = require('express');
+  const session       = require("express-session");        //session store for memory
+  const RedisStore    = require('connect-redis')(session); //session 持久化
   const app           = express();
   const swig          = require('swig');
   const cookieParser  = require('cookie-parser');
@@ -9,7 +11,11 @@
   const project       = require('../config/projectInfo.json');
   const version       = project.version;
   const port          = project.port;
+  const redis         = project.redis;
+  const secret        = project.secret; //加密cookie用
+  //router
   const viewsRouter   = require('../controller/viewsRouter.js');
+  const apiRouter     = require('../controller/apiRouter.js');
   /* use https
   var fs = require('fs');
   var options = {
@@ -20,14 +26,21 @@
   var server = null;
   */
 
-  var deployMiddleware = function(){
-    app.use(cookieParser());
-  };
-
   //設定靜態資源路徑
   var deployResource = function(){
     var res_url     = path.resolve(__dirname, '../../web/dist/'+version+'/');
     app.use(express.static(res_url));
+  };
+
+  var deployMiddleware = function(){
+    console.log(redis.host);
+    app.use(cookieParser());
+    app.use(session({
+      saveUninitialized: true,
+      resave: true,
+      store: new RedisStore({host:redis.host,port:redis.port}),
+      secret: secret                                    //加密用字串
+    }));
   };
 
   //
@@ -43,6 +56,8 @@
   //
   var deplayRouterHandler = function(){
     viewsRouter.initialize(app);
+    apiRouter.initialize(app);
+
   };
 
   //
@@ -58,9 +73,10 @@
   //start app server
   var start = function(){
       deployResource();
+      deployMiddleware();
       deployViewEngine();
       deplayRouterHandler();
-      deployMiddleware();
+      
       /*
       app.use(function(err, req, res, next) {
         console.error(err.stack);
