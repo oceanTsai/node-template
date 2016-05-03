@@ -7,12 +7,13 @@
 		   		
 		   		if( req.session.book){
 		   			console.log(req.session);
+		   			console.log("server 1");
 		   		}else{
 		   			req.session.book = {name : 'head first redis'};
-		   			console.log('empty');
+		   			console.log('empty server1');
 		   		}
 
-		   		res.send('Get a random book');
+		   		res.send('Get a random book server1');
 
 		   })
 		   .post(function(req, res) {
