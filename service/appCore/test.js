@@ -1,3 +1,6 @@
+//-------------------------
+// 單核 service 測試
+//-------------------------
 //node ./service/appCore/test.js
 console.log('==============================================');
 console.log(' service  run');

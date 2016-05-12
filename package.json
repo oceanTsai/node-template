@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "web template of nodejs + express + swig",
   "scripts": {
-    "start": "node ./service/appCore/service.js",
+    "start": "node ./service/appCore/muti-core-start.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "ocean",

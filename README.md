@@ -4,7 +4,7 @@
 3. Swig is view template engine.   
 
 # Guid
-1. need install nodejs.  (請先安裝 nodejs )
+1. need install nodejs V6 .  (請先安裝 nodejs )
 2. need install redis (do session share).   
 redis windows ref https://github.com/MSOpenTech/redis/releases 
 
