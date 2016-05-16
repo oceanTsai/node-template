@@ -1,43 +1,96 @@
 'use strict';
-(function(module){	
-	var deploy = function(app, router, resource, data){
-		/*
-		router.get(/page\/\w+/, function (req, res) {
-			var viewUrl = req.url.substring(1,req.url.length);
-			console.log(viewUrl);
-			res.status(200).send('page');
-		});*/
-		router.get(/\/test\w+/, function (req, res) {
-			var viewUrl = req.url.substring(1,req.url.length);
-			console.log(viewUrl);
-			res.status(200).send('page');
+(function(module){
+	var view,app,express;
+
+	/**
+	 * 路徑解析
+	 */
+	var pathPase = function(url){
+		var viewURL  =  url.substring(1,url.length);
+		var path     =  require('path');
+		var page     =  (viewURL) ? (path.resolve(__dirname, '../views/'+ viewURL) + '.html' ): (path.resolve(__dirname, '../views/index') + '.html');
+		var page_404 =  path.resolve(__dirname, '../views/404.html');
+		return {
+			viewURL  : viewURL,
+			page     : page,
+			page_404 : page_404		
+		}
+	};
+
+	/**
+	 * 渲染代理
+	 */
+	var renderProxy = function(req, res, existHandler, notFoundHandler){
+		var {viewURL, page, page_404} = pathPase(req.url);
+		var fs = require('fs');
+		fs.exists(page, function (exists) {
+			(exists) ? existHandler(req, res, page) : notFoundHandler(req, res, page_404) ;
 		});
+	};
 
-		app.use('/page', router);
-		
-		/*
-		app.get(/\w+\.html$/, function (req, res) {
-			var viewUrl = req.url.substring(1,req.url.length);
-			var fs = require('fs');
-			var path = require('path');
-
-			var filePath = path.resolve(__dirname, '../views/'+viewUrl);
-			console.log(viewUrl);
-			fs.exists(filePath, function (exists) {
-				//這裡需要檢查檔案存在與否
-				if(exists){
+	/**
+	 * root
+	 */
+	var deployRoot = function(app, router){
+		// /\/\w+/
+		// /^\/\w+$/
+		router.get(/^[A-Za-z0-9_/]+$/,function(req,res){
+			renderProxy(req, res,
+				//檔案存在
+				function(req, res, page){
 					res.status(200);
-					res.render(viewUrl, { title : '測試'});	
-				}else{
-					var htmlPath = path.resolve(__dirname, '../views/404.html');
-					res.render(htmlPath, { message : 'not fount page', status : '404'});					
+					res.render(page, { title : '入口首頁'});	
+				},
+				//檔案不存在
+				function(req, res, page){
+					res.render(page, { message : 'not fount page', status : '404'});					
 					res.status(404);
 				}
-			});
-		});*/		
+			);
+		});
+		app.use('/', router);
+	};
+
+	/**
+	 * test
+	 */
+	var depolyTest = function(app, router){
+		router.get(/^[A-Za-z0-9_/]+$/, function (req, res) {
+			renderProxy(req, res,
+				//檔案存在
+				function(req, res, page){
+					res.status(200);
+					res.render(page, { title : '測試頁面'});	
+				},
+				//檔案不存在
+				function(req, res, page){
+					res.render(page, { message : 'not fount page', status : '404'});					
+					res.status(404);
+				}
+			);
+		});
+		app.use('/test', router);
+	};
+
+	/**
+	 * 配置 view Router
+	 */
+	var deploy = function(resource, data){
+		//先後順序很重要，中介層是先加入的先觸發
+		depolyTest(app, express.Router());
+		deployRoot(app, express.Router());
+	};
+
+
+	var initialize = function(...args){
+		app = args[0];
+		express = args[1];
+		view = args[2];
+		return this;
 	};
 	
 	module.exports = {
+		initialize : initialize,
 		deploy : deploy
 	};
 })(module);
