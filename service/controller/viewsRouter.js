@@ -1,6 +1,6 @@
 'use strict';
 (function(module){
-	var view,app,express;
+	var view,app,express,resource;
 
 	/**
 	 * 路徑解析
@@ -39,7 +39,7 @@
 				//檔案存在
 				function(req, res, page){
 					res.status(200);
-					res.render(page, { title : '入口首頁'});	
+					res.render(page, { title : '入口首頁', resource : resource});	
 				},
 				//檔案不存在
 				function(req, res, page){
@@ -60,7 +60,7 @@
 				//檔案存在
 				function(req, res, page){
 					res.status(200);
-					res.render(page, { title : '測試頁面'});	
+					res.render(page, { title : '測試頁面',  resource : resource});	
 				},
 				//檔案不存在
 				function(req, res, page){
@@ -75,7 +75,7 @@
 	/**
 	 * 配置 view Router
 	 */
-	var deploy = function(resource, data){
+	var deploy = function(data){
 		//先後順序很重要，中介層是先加入的先觸發
 		depolyTest(app, express.Router());
 		deployRoot(app, express.Router());
@@ -86,6 +86,7 @@
 		app = args[0];
 		express = args[1];
 		view = args[2];
+		resource = args[3];
 		return this;
 	};
 	

@@ -13,7 +13,7 @@
   const cookieParser  = require('cookie-parser');                 // cookie解析模組
   const path          = require('path');                          // 路徑解析模組
   const project       = require('../config/projectInfo.json');    // 載入環境屬性檔案
-  const {version, port, redis, secret, viewType} = project;                 // es2015 物件解構，object destructuring with primitives 需要nodejs 6.
+  const {version, port, redis, secret, viewType, resource} = project;                 // es2015 物件解構，object destructuring with primitives 需要nodejs 6.
   const viewsRouter   = require('../controller/viewsRouter.js');  // 處理 html 的 router.
   const apiRouter     = require('../controller/apiRouter.js');    // 處理 API  的 router.
 
@@ -64,7 +64,7 @@
    */
   const deployRouterHandler = function(){
     apiRouter.initialize(app);                  //處理 API
-    viewsRouter.initialize(app, express, viewType).deploy();
+    viewsRouter.initialize(app, express, viewType, resource).deploy();
   };
 
   //
